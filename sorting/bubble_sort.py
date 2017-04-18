@@ -1,14 +1,8 @@
 """
 I implement the bubble sort.
 """
-import copy
 import numpy as np
-
-def swap(array,i,j):
-    temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
-    return
+from swap import *
 
 def bubble(array):
     N = len(array)
