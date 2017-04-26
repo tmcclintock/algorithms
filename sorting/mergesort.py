@@ -1,7 +1,6 @@
 """
 My implementation of mergesort.
 """
-from swap import *
 import numpy as np
 
 def merge(array):
