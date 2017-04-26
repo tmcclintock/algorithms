@@ -6,36 +6,29 @@ import numpy as np
 
 def quicksort(array, lo=0, hi=None):
     #First call doesn't know the length
-    if hi == None: hi = len(array)
+    if hi == None: hi = len(array)-1
 
     #Base case
     if lo >= hi: return array
 
-    #Pick a pivot and sort on that pivot
-    left  = []
-    right = []
-    pivot = lo
+    #Pick a pivot and partition
+    pivot = hi
     pivot_value = array[pivot]
+    N = lo
     for i in range(lo, hi):
-        if i == pivot: continue
-        if array[i] <= pivot_value: 
-            left.append(array[i])
-        else:
-            right.append(array[i])
-    left.append(pivot_value)
-    NL = len(left)
-    array[lo: lo+NL] = left
-    array[lo+NL: hi] = right
+        if array[i] <= array[pivot]:
+            swap(array, i, N)
+            N += 1
+    swap(array, N, pivot)
 
     #Continue with other calls
-    print lo, lo+NL, hi, pivot_value, left, right, array
-    #array = quicksort(array, lo, lo+NL)
-    #array = quicksort(array, lo+NL+1, hi)
+    array = quicksort(array, lo, N-1)
+    array = quicksort(array, N+1, hi)
     return array
         
 
 if __name__ == "__main__":
-    data = np.loadtxt("data.txt")[:6]
+    data = np.loadtxt("data.txt")
     print data
     data = quicksort(data)
-    #print data
+    print data
